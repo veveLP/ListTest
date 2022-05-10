@@ -46,12 +46,6 @@ namespace TestList
                 if (Char.IsDigit(c)) { cisla.Add(c.ToString()); continue; }
                 if(!(Char.IsLetterOrDigit(c))) { ostatni.Add(c.ToString()); continue; }
             }
-            foreach (String str in txt.Split(' '))
-            {
-                //if(str.All(Char.IsLetter) && str.Length > 1) { slova.Add(str); continue; }
-                //if(str.All(Char.IsDigit) && str.Length > 0) { cisla.Add(str); MessageBox.Show(str); continue; }
-                //if(!str.All(Char.IsLetterOrDigit)) { ostatni.Add(str); }
-            }
             cisla.Sort();
             ostatni.Sort();
             //ostatni.OrderBy(s => s, StringComparer.Ordinal);
@@ -75,8 +69,12 @@ namespace TestList
             vypis(slova, listBox1);
             vypis(cisla, listBox2);
             vypis(ostatni, listBox3);
-            if(cisla.Count %2 == 0) { MessageBox.Show("Medián = " + ((Double.Parse(cisla[cisla.Count / 2]) + Double.Parse(cisla[(cisla.Count/2)-1]))/2).ToString()); return; }
-            MessageBox.Show("Medián = "+cisla[cisla.Count / 2]);
+            try
+            {
+                if (cisla.Count % 2 == 0) { MessageBox.Show("Medián = " + ((Double.Parse(cisla[cisla.Count / 2]) + Double.Parse(cisla[(cisla.Count / 2) - 1])) / 2).ToString()); return; }
+                MessageBox.Show("Medián = " + cisla[cisla.Count / 2]);
+            }
+            catch (Exception) { MessageBox.Show("Nastala chyba v mediánu!"); }
             
         }
     }
